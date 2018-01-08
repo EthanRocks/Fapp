@@ -15,11 +15,6 @@ namespace WankAPP
             {
                 switch (line)
                 {
-                    case ("wank offi"):
-                        line = "";
-                        myWank.Do_Fap(Wank.WankSpeed.Offi, 50, 40);
-                        line = Console.ReadLine();
-                        break;
                     case ("wank god"):
                         line = "";
                         myWank.Do_Fap(Wank.WankSpeed.God, 50, 32);
@@ -144,10 +139,6 @@ namespace WankAPP
                 case WankSpeed.Tiny:
                     delayTime = 150;
                     break;
-
-                case WankSpeed.Offi:
-                    delayTime = 135;
-                    break;
             }
             if (isWanking)
             {
@@ -201,7 +192,7 @@ namespace WankAPP
             Console.WriteLine("Please Enter a Command");
 
         }
-        public enum WankSpeed { Fast, Slow, God, Sloth, Tiny, Med, Offi }
+        public enum WankSpeed { Fast, Slow, God, Sloth, Tiny, Med }
     }
 
 
