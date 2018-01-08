@@ -15,34 +15,39 @@ namespace WankAPP
             {
                 switch (line)
                 {
+                    case ("wank offi"):
+                        line = "";
+                        myWank.Do_Fap(Wank.WankSpeed.Offi, 50, 40);
+                        line = Console.ReadLine();
+                        break;
                     case ("wank god"):
                         line = "";
-                        myWank.Do_Fap(Wank.WankSpeed.God, 50);
+                        myWank.Do_Fap(Wank.WankSpeed.God, 50, 32);
                         line = Console.ReadLine();
                         break;
                     case ("wank fast"):
                         line = "";
-                        myWank.Do_Fap(Wank.WankSpeed.Fast, 50);
+                        myWank.Do_Fap(Wank.WankSpeed.Fast, 50, 10);
                         line = Console.ReadLine();
                         break;
                     case ("wank slow"):
                         line = "";
-                        myWank.Do_Fap(Wank.WankSpeed.Slow, 50);
+                        myWank.Do_Fap(Wank.WankSpeed.Slow, 50, 10);
                         line = Console.ReadLine();
                         break;
                     case ("wank sloth"):
                         line = "";
-                        myWank.Do_Fap(Wank.WankSpeed.Sloth, 50);
+                        myWank.Do_Fap(Wank.WankSpeed.Sloth, 50, 10);
                         line = Console.ReadLine();
                         break;
                     case ("wank tiny"):
                         line = "";
-                        myWank.Do_Fap(Wank.WankSpeed.Tiny, 50);
+                        myWank.Do_Fap(Wank.WankSpeed.Tiny, 50, 6);
                         line = Console.ReadLine();
                         break;
                     case ("wank medium"):
                         line = "";
-                        myWank.Do_Fap(Wank.WankSpeed.Med, 50);
+                        myWank.Do_Fap(Wank.WankSpeed.Med, 50, 10);
                         line = Console.ReadLine();
                         break;
                 }
@@ -54,41 +59,64 @@ namespace WankAPP
     {
         int Fapcounter;
         int Blamcounter;
+        int Faplength;
+        int Fapdirection = 1;
 
         public void Fap()
         {
-            Fapcounter++;
-            switch (Fapcounter % 6)
-            {
-                case 0:
-                    Console.Write("8====MM=D");
-                    Console.SetCursorPosition(Console.CursorLeft - 9, Console.CursorTop);
-                    break;
-                case 1:
-                    Console.Write("8===MM==D");
-                    Console.SetCursorPosition(Console.CursorLeft - 9, Console.CursorTop);
-                    break;
-                case 2:
-                    Console.Write("8==MM===D");
-                    Console.SetCursorPosition(Console.CursorLeft - 9, Console.CursorTop);
-                    break;
-                case 3:
-                    Console.Write("8=MM====D");
-                    Console.SetCursorPosition(Console.CursorLeft - 9, Console.CursorTop);
-                    break;
-                case 4:
-                    Console.Write("8==MM===D");
-                    Console.SetCursorPosition(Console.CursorLeft - 9, Console.CursorTop);
-                    break;
-                case 5:
-                    Console.Write("8===MM==D");
-                    Console.SetCursorPosition(Console.CursorLeft - 9, Console.CursorTop);
-                    break;
+            Fapcounter = Fapcounter + Fapdirection;
+
+            Console.Write("8");
+            for (int i = 0; i < Faplength + 2; i++) {
+                if (i == Fapcounter) {
+                    Console.Write("MM");
+                }
+                Console.Write("=");
             }
+            Console.Write("D");
+            Console.SetCursorPosition(Console.CursorLeft - Faplength - 6, Console.CursorTop);
+
+            if (Fapcounter > Faplength) {
+                Fapdirection = -1;
+            }
+
+            if (Fapcounter < 1) {
+                Fapdirection = 1;
+            }
+
+            // switch (Fapcounter % 6)
+            // {
+            //     case 0:
+            //         Console.Write("8====MM=D");
+            //         Console.SetCursorPosition(Console.CursorLeft - 9, Console.CursorTop);
+            //         break;
+            //     case 1:
+            //         Console.Write("8===MM==D");
+            //         Console.SetCursorPosition(Console.CursorLeft - 9, Console.CursorTop);
+            //         break;
+            //     case 2:
+            //         Console.Write("8==MM===D");
+            //         Console.SetCursorPosition(Console.CursorLeft - 9, Console.CursorTop);
+            //         break;
+            //     case 3:
+            //         Console.Write("8=MM====D");
+            //         Console.SetCursorPosition(Console.CursorLeft - 9, Console.CursorTop);
+            //         break;
+            //     case 4:
+            //         Console.Write("8==MM===D");
+            //         Console.SetCursorPosition(Console.CursorLeft - 9, Console.CursorTop);
+            //         break;
+            //     case 5:
+            //         Console.Write("8===MM==D");
+            //         Console.SetCursorPosition(Console.CursorLeft - 9, Console.CursorTop);
+            //         break;
+            // }
         }
 
-        public void Do_Fap(WankSpeed speed, int strokes)
+        public void Do_Fap(WankSpeed speed, int strokes, int length)
         {
+            Faplength = length;
+
             bool isWanking = true;
             int delayTime = 100;
             switch (speed)
@@ -116,6 +144,10 @@ namespace WankAPP
                 case WankSpeed.Tiny:
                     delayTime = 150;
                     break;
+
+                case WankSpeed.Offi:
+                    delayTime = 135;
+                    break;
             }
             if (isWanking)
             {
@@ -125,7 +157,7 @@ namespace WankAPP
                     Fap();
                 }
                 Do_Blamm();
-                
+
 
                 isWanking = false;
             }
@@ -136,27 +168,21 @@ namespace WankAPP
         public void Blamm()
         {
             Blamcounter++;
-            switch (Blamcounter % 4)
             {
-                case 0:
-                    Console.Write("8====MM=D-");
-                    Console.SetCursorPosition(Console.CursorLeft - 10, Console.CursorTop);
-                    break;
-                case 1:
-                    Console.Write("8====MM=D --");
-                    Console.SetCursorPosition(Console.CursorLeft - 12, Console.CursorTop);
-                    break;
-                case 2:
-                    Console.Write("8====MM=D --_");
-                    Console.SetCursorPosition(Console.CursorLeft - 13, Console.CursorTop);
-                    break;
-                case 3:
-                    Console.Write("8====MM=D ___");
-                    Console.SetCursorPosition(Console.CursorLeft - 13, Console.CursorTop);
-                    break;
+                Console.Write("8");
+            for (int i = 0; i < Faplength + 2; i++)
+            {
+                if (i == Fapcounter)
+                {
+                    Console.Write("MM");
+                }
+                Console.Write("=");
             }
-        }
-
+            Console.Write("D");
+                    Console.Write(" --___");
+            Console.SetCursorPosition(Console.CursorLeft - Faplength - 12, Console.CursorTop);
+            }
+    }
 
         public void Do_Blamm()
         {
@@ -173,11 +199,11 @@ namespace WankAPP
             }
             Console.Clear();
             Console.WriteLine("Please Enter a Command");
-            
+
         }
-        public enum WankSpeed { Fast, Slow, God, Sloth, Tiny, Med }
+        public enum WankSpeed { Fast, Slow, God, Sloth, Tiny, Med, Offi }
     }
 
 
-  
+
 }
